@@ -6,7 +6,7 @@ This project is ideal for HR teams, recruiters or companies looking to streamlin
 
 ## Key Features
 
-- 📥 Automatically fetches new resume emails from Gmail.
+📥 Automatically fetches new resume emails from Gmail.
 - 📄 Extracts text from attached PDF resumes.
 - 🤖 Evaluates resumes using the Google Gemini AI model for insights like skills, experience and suitability.
 - 🔁 End-to-end automation without manual intervention.
