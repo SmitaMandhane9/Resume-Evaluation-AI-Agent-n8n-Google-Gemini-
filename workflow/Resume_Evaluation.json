@@ -1,0 +1,334 @@
+{
+  "name": "Resume Evaluation",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "INBOX"
+          ],
+          "q": "has:attachment",
+          "readStatus": "both"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -100,
+        0
+      ],
+      "id": "8732d53a-030d-4b57-86fa-002b2aa4a26e",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9M5n324sEz8GHp0h",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "=attachment_0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        80,
+        0
+      ],
+      "id": "1e043f60-fd30-496e-9032-c4c68a5556bf",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Extract from File').item.json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Evaluate this resume for a Data Scientist role based on these criteria: First, the candidate must have at least 3 years of work experience in data science or a related role. Second, their skills should include machine learning, Python, SQL, and other data science-related skills. Third, they should have worked on data science-related projects during those 3 years, using the relevant skills. Finally, they need to have a Bachelor's, Master's, or PhD in a relevant field like Computer Science or Data Science. Assign a score out of 2.5 for each criterion and provide a total score out of 10. Provide me output in the following format.\n\n\nCandidate_Name: Provide name of the candidate\n\nCandidate_Email Id: Provide email id of the candidate\n\nRelevant_work_experience: Provide work experience of the candidate and if relevant Provide score out of 2.5\n\nSkills:  Provide Skills of the candidate and Provide score out of 2.5\n\nRelevant_Projects: Provide Relevant project of the candidate and Provide score out of 2.5\n\nEducation: Provide Education of the candidate and Provide score out of 2.5\n\nTotal_Score: Now Sum the score of above 4 criteria and provide total score out of 10 "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        520,
+        0
+      ],
+      "id": "82870746-6cd6-4f4b-93d7-dfadb3144ae4",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"Candidate_Name\": \"Aditya Sharma\",\n  \"Candidate_Email_Id\": \"aditya@gmail.com\",\n  \"Relevant_work_experience\": \"2\",\n   \"Skills\": \"1\",\n  \t\"Related_Projects\": \"2\",\n  \t\"Education\": \"1\",\n  \t\"Total_Score\": \"6\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        680,
+        240
+      ],
+      "id": "ba2c674a-684c-4093-bef0-05529d13ba7c",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "137dwfRzdYlQyliT-OhSy7_CY3M2b0wsGhqcyQc4VOqY",
+          "mode": "list",
+          "cachedResultName": "AI Agent Example",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/137dwfRzdYlQyliT-OhSy7_CY3M2b0wsGhqcyQc4VOqY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/137dwfRzdYlQyliT-OhSy7_CY3M2b0wsGhqcyQc4VOqY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Skills": "={{ $json.output.Skills }}",
+            "Education": "={{ $json.output.Education }}",
+            "Candidate_Name": "={{ $json.output.Candidate_Name }}",
+            "Candidate_ Email_Id": "={{ $json.output.Candidate_Email_Id }}",
+            "Relevant_work_experience": "={{ $json.output.Relevant_work_experience }}",
+            "Related_Projects": "={{ $json.output.Related_Projects }}",
+            "Total_Score": "={{ $json.output.Total_Score }}"
+          },
+          "matchingColumns": [
+            "output"
+          ],
+          "schema": [
+            {
+              "id": "Candidate_Name",
+              "displayName": "Candidate_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Candidate_ Email_Id",
+              "displayName": "Candidate_ Email_Id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Relevant_work_experience",
+              "displayName": "Relevant_work_experience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Skills",
+              "displayName": "Skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Related_Projects",
+              "displayName": "Related_Projects",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Education",
+              "displayName": "Education",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total_Score",
+              "displayName": "Total_Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        980,
+        0
+      ],
+      "id": "3891617c-4c23-4d32-8513-a2230f1a595e",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5Q6Ru5Gp5WzSG5ZN",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-pro-exp",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        520,
+        240
+      ],
+      "id": "25453304-3428-4687-a6d2-ce75e3a1b83f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "UC4cpRyAKHsZeORj",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "caf2a1bf-7803-4e89-babf-59dd5c87fece",
+              "name": "",
+              "value": "=Sender Email address:\n{{ $('Gmail Trigger').item.json.from.value[0].address }}\n\nEmail Subject:\n{{ $('Gmail Trigger').item.json.subject }}\n\nEmail body:\n{{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        260,
+        0
+      ],
+      "id": "610ae793-49cb-4575-9df1-6b9f5dc89db9",
+      "name": "Edit Fields",
+      "alwaysOutputData": false
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d9095e0e-009a-4b63-bb5d-9440a2891d4a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c7420486e3db1b81bfc62193e930b0adfb2cf2e6bd6639687605edd3cf1b5d17"
+  },
+  "id": "Ss4aOuC993Cy5sEq",
+  "tags": []
+}
