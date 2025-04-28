@@ -1,8 +1,10 @@
 # Resume-Evaluation-AI-Agent-n8n-Google-Gemini
 
-This repository contains a fully automated solution designed to process incoming resumes via Gmail, extract their content and evaluate them using Google's Gemini AI model — all set up through [n8n.io](https://n8n.io), a powerful low-code automation platform.
+## Problem Statement
 
-This project is ideal for HR teams, recruiters or companies looking to streamline candidate screening using AI.
+Recruiters and HR teams often receive hundreds of resumes via email, making it difficult, time-consuming and error-prone to manually screen and evaluate each candidate. Traditional resume screening methods are manual, inconsistent and can miss highly qualified candidates due to human fatigue or oversight. There is a growing need for an automated, intelligent and scalable way to analyze resumes as soon as they are received — helping organizations make faster, more accurate hiring decisions.
+
+This repository contains a fully automated solution designed to process incoming resumes via Gmail, extract their content and evaluate them using Google's Gemini AI model — all set up through [n8n.io](https://n8n.io), a powerful low-code automation platform. This project is ideal for HR teams, recruiters or companies looking to streamline candidate screening using AI.
 
 ## Key Features
 
@@ -40,12 +42,18 @@ This project is ideal for HR teams, recruiters or companies looking to streamlin
    
     <img width="911" alt="image" src="https://github.com/user-attachments/assets/c135b53e-46df-45a6-a41f-5985966d5b6e" />
 
+## How This Project Helps
 
+- Real-time Resume Processing: As soon as resumes arrive, they are evaluated automatically.
+- AI-Based Candidate Insights: Identify skills, experience levels and suitability based on custom prompts.
+- Time Savings: Reduces manual resume screening time by over 80%.
+- Improved Accuracy: AI ensures that qualified candidates are not missed.
+- Scalability: Can handle hundreds or thousands of resumes without human fatigue.
+- Easy Integration: Can be expanded into ATS (Applicant Tracking Systems) or recruitment CRMs.
 
-## ⚙️ Getting Started
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/resume-ai-agent-n8n.git
-cd resume-ai-agent-n8n
-
+## Where You Can Use This
+- Startup hiring
+- Corporate HR teams
+- Recruitment agencies
+- Freelance recruiters
+- Educational institutions (for campus placements)
