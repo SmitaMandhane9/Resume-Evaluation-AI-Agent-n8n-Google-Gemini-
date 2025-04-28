@@ -24,7 +24,7 @@ This repository contains a fully automated solution designed to process incoming
 | **Gmail API** | Reading resume attachments from emails |
 | **PDF Extractor** | Reading text content from resumes |
 | **Google Sheets** | Storing data in google sheets |
----
+
 
 ## Workflow Structure
 
