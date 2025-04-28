@@ -7,11 +7,11 @@ This project is ideal for HR teams, recruiters or companies looking to streamlin
 ## Key Features
 
 📥 Automatically fetches new resume emails from Gmail.
-- 📄 Extracts text from attached PDF resumes.
-- 🤖 Evaluates resumes using the Google Gemini AI model for insights like skills, experience and suitability.
-- 🔁 End-to-end automation without manual intervention.
-- 🛡️ Error handling built-in to manage missing or empty attachments gracefully.
-- 🔔 Easily extendable to send notifications, store results or trigger next steps.
+📄 Extracts text from attached PDF resumes.
+🤖 Evaluates resumes using the Google Gemini AI model for insights like skills, experience and suitability.
+🔁 End-to-end automation without manual intervention.
+🛡️ Error handling built-in to manage missing or empty attachments gracefully.
+🔔 Easily extendable to send notifications store results or trigger next steps.
 
 ## Tech Stack
 
@@ -21,10 +21,10 @@ This project is ideal for HR teams, recruiters or companies looking to streamlin
 | **Google Gemini API** | AI-based text evaluation |
 | **Gmail API** | Reading resume attachments from emails |
 | **PDF Extractor** | Reading text content from resumes |
-
+| **Google Sheets** | Storing data in google sheets |
 ---
 
-## 🏗️ Workflow Structure
+## Workflow Structure
 
 1. **Gmail Trigger Node**  
    ➔ Detects new emails with PDF attachments.
@@ -36,9 +36,11 @@ This project is ideal for HR teams, recruiters or companies looking to streamlin
    ➔ Sends extracted text to Gemini for intelligent evaluation.
 
 4. **Output / Next Steps**  
-   ➔ (Customizable) Store evaluations, send Slack/Email notifications, or move candidate profiles into ATS systems.
+   ➔ (Customizable) Store evaluations, send Slack/Email notifications or move candidate profiles into ATS systems.
+   
+    <img width="911" alt="image" src="https://github.com/user-attachments/assets/c135b53e-46df-45a6-a41f-5985966d5b6e" />
 
----
+
 
 ## ⚙️ Getting Started
 
