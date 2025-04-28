@@ -57,3 +57,6 @@ This repository contains a fully automated solution designed to process incoming
 - Recruitment agencies
 - Freelance recruiters
 - Educational institutions (for campus placements)
+
+🙌 Contributing
+Feel free to submit pull requests, open issues or suggest features!
